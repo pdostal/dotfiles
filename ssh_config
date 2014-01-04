@@ -1,0 +1,24 @@
+Host hom
+	Hostname hom.pdostal.cz
+	User quick
+	KeepAlive yes
+	Compression yes
+
+Host deb
+	#Hostname fec0::2
+	Hostname 192.168.56.2
+	User quick
+	KeepAlive yes
+	Compression yes
+
+Host shark
+	Hostname shark.pdostal.cz
+	User quick
+	KeepAlive yes
+	Compression yes
+
+Host monka
+	Hostname monka.hysteria.cz
+	User quick
+	KeepAlive yes
+	Compression yes

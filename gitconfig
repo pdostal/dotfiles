@@ -1,0 +1,8 @@
+[user]
+	name = pdostal
+	email = git@pdostal.cz
+[alias]
+	lg = log --stat --summary --pretty=oneline
+	ll = log --pretty=oneline
+	cm = !git add -A && git commit --no-status -am
+	st = !git add -A && git status -sbuall --ignored
