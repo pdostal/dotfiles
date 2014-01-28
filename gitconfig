@@ -2,7 +2,18 @@
 	name = pdostal
 	email = git@pdostal.cz
 [alias]
-	lg = log --stat --summary --pretty=oneline
-	ll = log --pretty=oneline
+	lg = log --stat --summary
+	ll = !git log --pretty=oneline | tail -n12
 	cm = !git add -A && git commit --no-status -am
+	pu = push
+	puf = push --force
+	puh = push heroku master
 	st = !git add -A && git status -sbuall --ignored
+	br = branch
+	brdel = !sh -c 'git branch -D $1 && git push origin --delete $1' -
+	sh = stash
+	re = reset --soft HEAD^
+	rea = remote add
+	rer = remote rm
+	cl = clone
+
