@@ -3,7 +3,7 @@
 	email = git@pdostal.cz
 [alias]
 	lg = log --stat --summary
-	ll = !git log --pretty=oneline | tail -n12
+	ll = !git log --pretty=oneline
 	cm = !git add -A && git commit --no-status -am
 	pu = push
 	puf = push --force
@@ -16,4 +16,5 @@
 	rea = remote add
 	rer = remote rm
 	cl = clone
-
+[color]
+  ui = auto
