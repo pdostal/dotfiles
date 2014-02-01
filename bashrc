@@ -16,7 +16,6 @@ alias la='ls -laF --color=always'
 alias rmr='rm -rf'
 alias rs='rsync -av --delete'
 
-export PATH="/usr/local/rvm/bin:$PATH"
-export PATH="/usr/local/heroku/bin:$PATH"
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+if [ -f ~/.bashpath ]; then
+	source ~/.bashpath
+fi
