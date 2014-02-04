@@ -1,6 +1,6 @@
 #export SHELL=/bin/bash
 #export PS1="\u@\h:\w $ "
-export PS1="\e[93m\u\e[92m@\e[34m\h\e[95m:\e[96m\w \e[37m$ \e[39m"
+export PS1="\[\033[0;32m\]\u\[\033[0;33m\]@\[\033[0;34m\]\h\[\033[0;35m\]:\[\033[0;31m\]\w \[\033[0;36m\]$ \[\033[1;37m\]"
 export EDITOR="vim"
 
 unset MAILCHECK
