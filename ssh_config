@@ -4,17 +4,12 @@ Host hom
 	KeepAlive yes
 	Compression yes
 
-Host deb
-	#Hostname fec0::2
-	Hostname 192.168.56.2
-	User quick
-	KeepAlive yes
-	Compression yes
-
 Host shark
 	Hostname shark.pdostal.cz
 	User quick
 	KeepAlive yes
+	ServerAliveInterval 15
+	ServerAliveCountMax 720
 	Compression yes
 
 Host monka
