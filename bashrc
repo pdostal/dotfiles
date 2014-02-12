@@ -3,6 +3,10 @@
 export PS1="\[\033[0;32m\]\u\[\033[0;33m\]@\[\033[0;34m\]\h\[\033[0;35m\]:\[\033[0;31m\]\w \[\033[0;36m\]$\[\033[0;37m\] "
 export EDITOR="vim"
 
+export CLICOLOR=1
+export LSCOLORS=Exfxcxdxbxegedabagacad
+export GREP_OPTIONS='--color=auto'
+
 unset MAILCHECK
 
 case $TERM in
@@ -11,8 +15,8 @@ case $TERM in
         ;;
 esac
 
-alias ls='ls -F --color=always'
-alias la='ls -laF --color=always'
+alias ls='ls -F'
+alias la='ls -laF'
 alias rmr='rm -rf'
 alias rs='rsync -av --delete'
 
