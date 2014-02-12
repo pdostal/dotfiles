@@ -9,6 +9,8 @@ export GREP_OPTIONS='--color=auto'
 
 unset MAILCHECK
 
+export PATH=/usr/local/bin/:$PATH
+
 case $TERM in
     xterm*)
         echo -ne "\033]0;"$USER@$HOSTNAME"\007"
