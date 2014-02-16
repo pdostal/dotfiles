@@ -9,7 +9,7 @@ export GREP_OPTIONS='--color=auto'
 
 unset MAILCHECK
 
-export PATH=~/bin/:/usr/local/bin/:$PATH
+export PATH=~/bin/:/usr/local/bin/:/Applications/Postgres93.app/Contents/MacOS/bin/:$PATH
 
 case $TERM in
     xterm*)
