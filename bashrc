@@ -21,6 +21,7 @@ alias ls='ls -F'
 alias la='ls -laF'
 alias rmr='rm -rf'
 alias rs='rsync -av --delete'
+alias sudo='sudo '
 
 if [ -f ~/.bashpath ]; then
 	source ~/.bashpath
