@@ -44,12 +44,21 @@ find_git_dirty() {
   fi
 }
 
+if [ -d ~/external/kube-ps1/ ]; then
+  source ~/external/kube-ps1/kube-ps1.sh
+  KUBE_PS1_SYMBOL_ENABLE=false
+  KUBE_PS1_PREFIX=' '
+  KUBE_PS1_SUFFIX=''
+else
+  alias kube_ps1=echo
+fi
+
 PROMPT_COMMAND="find_git_branch; find_git_tag; find_git_dirty; $PROMPT_COMMAND"
 
 if [ "$myPrimaryDevice" == 1 ]; then
-  export PS1="\[\e]0;local: \w\a\007\]\h:\w\$git_branch\$git_tag\$git_dirty$ "
+  export PS1="\[\e]0;local: \w\a\007\]\h:\w\$git_branch\$git_tag\$git_dirty\$(kube_ps1)$ "
 else
-  export PS1="\[\e]0;\h: \w\a\007\]\u@\h:\w\$git_branch\$git_tag\$git_dirty$ "
+  export PS1="\[\e]0;\h: \w\a\007\]\u@\h:\w\$git_branch\$git_tag\$git_dirty\$(kube_ps1)$ "
 fi
 
 export EDITOR="vim"
