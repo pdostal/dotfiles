@@ -3,7 +3,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LC_TIME=”en_US.UTF-8
-export LC_COLLATE=”en_US.UTF-8″
 export LC_NUMERIC=”en_US.UTF-8″
 export LC_MONETARY=”en_US.UTF-8″
 export LC_MESSAGES=”en_US.UTF-8″
@@ -125,5 +124,15 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
+fi
+
+if [ -f /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+if [ `which gh` ]; then
+  eval "$(gh completion)"
 fi
 
