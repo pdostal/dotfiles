@@ -1,0 +1,7 @@
+# Disable SC1091 (info): Not following: /usr/share/bash-completion/bash_completion was not specified as input (see shellcheck -x).
+# Disable SC1090 (warning): ShellCheck can't follow non-constant source. Use a directive to specify location
+# Disable SC2154 (warning): myPrimaryDevice is referenced but not assigned
+# Disable SC2086 (info): Double quote to prevent globbing and word splitting.
+# Disable SC2231 (info): Quote expansions in this for loop glob to prevent wordsplitting, e.g. "$dir"/*.txt .
+disable=SC1091,SC1090,SC2154,SC2086,SC2231
+

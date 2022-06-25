@@ -1,25 +1,9 @@
 #!/bin/sh
 
-copyone() {
-  echo "@ $3\t$1";
-  if [ ! -f $1 ]; then
-    mkdir -p `dirname $1`;
-  fi
-  rm -rf $1;
-  cp $2 $1;
-  chown -Rf $USER $1;
-  chmod -Rf $3 $1;
-}
-copytwo() {
-  echo "     \t$1_secret";
-  if [ -f $2 ]; then
-    cat $2 1>> $1;
-  fi
-}
 copydir() {
-  echo "# $3\t$1";
+  echo "# $3  $1/";
   if [ ! -d $1/../ ]; then
-    mkdir -p `dirname $1/../`;
+    mkdir -p "$(dirname $1/../)"
   fi
   rm -rf $1;
   cp -R $2 $1;
@@ -27,14 +11,27 @@ copydir() {
   chmod -Rf $3 $1;
 }
 
+copyone() {
+  echo "@ $3  $1";
+  if [ ! -f $1 ]; then
+    mkdir -p "$(dirname $1)"
+  fi
+  rm -rf $1;
+  cp $2 $1;
+  chown -Rf $USER $1;
+  chmod -Rf $3 $1;
+}
+
+copytwo() {
+  echo "       $1_secret";
+  if [ -f $2 ]; then
+    cat $2 1>> $1;
+  fi
+}
+
 # bash
 copyone $1/.bashrc $2/bashrc 770
-copytwo $1/.bashrc $2/sh_aliases
-copytwo $1/.bashrc $2/sh_secret
-# zsh
-copyone $1/.zshrc $2/zshrc 770
-copytwo $1/.zshrc $2/sh_aliases
-copytwo $1/.zshrc $2/sh_secret
+copytwo $1/.bashrc $2/bashrc_secret
 # vim
 copydir $1/.vim $2/vim 775
 # git

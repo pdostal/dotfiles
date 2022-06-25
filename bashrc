@@ -1,17 +1,13 @@
-export MM_CHARSET=utf8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export LC_TIME=”en_US.UTF-8
-export LC_NUMERIC=”en_US.UTF-8″
-export LC_MONETARY=”en_US.UTF-8″
-export LC_MESSAGES=”en_US.UTF-8″
+#!/usr/bin/env bash
+export LANG="en_us.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
 
-export GPG_TTY=$(tty)
-
-if [ -z "$PS1" ]; then
-  return
-fi
+[ -z "$PS1" ] && return
 
 # Based on: https://github.com/jimeh/git-aware-prompt
 find_git_branch() {
@@ -35,7 +31,8 @@ find_git_tag() {
   fi
 }
 find_git_dirty() {
-  local status=$(git status --porcelain 2> /dev/null)
+  local status
+  status="$(git status --porcelain 2> /dev/null)"
   if [[ "$status" != "" ]]; then
     git_dirty="'"
   else
@@ -45,9 +42,9 @@ find_git_dirty() {
 
 if [ -d ~/external/kube-ps1/ ]; then
   source ~/external/kube-ps1/kube-ps1.sh
-  KUBE_PS1_SYMBOL_ENABLE=false
-  KUBE_PS1_PREFIX=' '
-  KUBE_PS1_SUFFIX=''
+  export KUBE_PS1_SYMBOL_ENABLE=false
+  export KUBE_PS1_PREFIX=' '
+  export KUBE_PS1_SUFFIX=''
 else
   alias kube_ps1=echo
 fi
@@ -62,77 +59,92 @@ fi
 
 export EDITOR="vim"
 
-export CLICOLOR=1
-export LSCOLORS=Exfxcxdxbxegedabagacad
-
 unset MAILCHECK
-
-export PATH=./bin:~/bin:/usr/local/sbin:$PATH
 
 HISTSIZE=10000
 HISTFILESIZE=1000000
 shopt -s histappend
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-if hash rbenv 2>/dev/null ; then
-  eval "$(rbenv init -)"
-fi
-
-if hash fasd 2>/dev/null ; then
-  fasd_cache="$HOME/.fasd-init-bash"
-  if [ hash fasd 2>/dev/null && "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-    fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
-  fi
-  source "$fasd_cache"
-  unset fasd_cache
-fi
-
-
-SSH_ENV="$HOME/.ssh/environment"
+# SSH agnet
 function start_agent {
-  echo '' > $SSH_ENV
-  chmod 600 $SSH_ENV
-  ssh-agent >> $SSH_ENV
-  source $SSH_ENV > /dev/null
+  echo '' > "$HOME/.ssh/environment"
+  chmod 600 "$HOME/.ssh/environment"
+  ssh-agent >> "$HOME/.ssh/environment"
+  source "$HOME/.ssh/environment" > /dev/null
   echo "The SSH agent runs as ${SSH_AGENT_PID} ."
   ssh-add
 }
 
-if [ -f "${SSH_ENV}" ]; then
-  . "${SSH_ENV}" > /dev/null
-  if ! ps -p $SSH_AGENT_PID > /dev/null; then
+if [ -f "$HOME/.ssh/environment" ]; then
+  source "$HOME/.ssh/environment" > /dev/null
+  if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
     echo "Process ${SSH_AGENT_PID} is dead."
     start_agent
   else
     echo "The SSH agent runs as ${SSH_AGENT_PID} ."
   fi
 else
-  echo "File ${SSH_ENV} does not exist yet."
+  echo "File $HOME/.ssh/environment does not exist yet."
   start_agent
 fi
 
-if [ -d "/usr/local/bin" ]; then
-  export PATH="/usr/local/bin:$PATH"
+[ -d "/usr/local/bin" ] && export PATH="/usr/local/bin:$PATH"
+export PATH="./bin:$HOME/bin:/usr/local/sbin:$PATH"
+[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
+
+# Bash completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  source /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+  source /etc/bash_completion
 fi
-if [ -d "~/bin" ]; then
-  export PATH="~/bin:$PATH"
+[ -f /usr/local/share/bash-completion/bash_completion ] && source /usr/local/share/bash-completion/bash_completion
+[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && source /opt/homebrew/etc/profile.d/bash_completion.sh
+
+[ "$(command -v gh &> /dev/null)" ] && eval '$(gh completion)'
+
+if [ "$(command -v kubectl &> /dev/null)" ]; then
+  eval '$(kubectl completion bash)'
+  complete -o default -F __start_kubectl k
 fi
 
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
+[ -f /opt/homebrew/bin/brew ] && eval '$(/opt/homebrew/bin/brew shellenv)'
 
-if [ -f /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+[ "$(hash rbenv 2>/dev/null)" ] && eval '$(rbenv init -)'
 
-[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+alias g='git'
+alias k=kubectl
+alias lastsudo='sudo $(history -p \!\!)'
+alias dotfilesapply='~/dotfiles/apply.sh ~ ~/dotfiles'
+alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
+alias mtr='sudo mtr'
 
-if [ `which gh` ]; then
-  eval "$(gh completion)"
-fi
+# BLK                   0
+# CAPABILITY            0
+# CHR                   0
+# DIR                   0
+# DOOR                  0
+# EXEC                  0
+# FIFO                  0
+# FILE                  0
+# LINK                  0
+# MULTIHARDLINK         0
+# NORMAL                0
+# ORPHAN                0
+# OTHER_WRITABLE        0
+# SETGID                0
+# SETUID                0
+# SOCK                  0
+# STICKY                0
+# STICKY_OTHER_WRITABLE 0
+export LS_COLORS='bd=0:ca=0:cd=0:di=0:do=0:ex=0:pi=0:fi=0:ln=0:mh=0:no=0:or=0:ow=0:sg=0:su=0:so=0:st=0:tw=0:'
+
+alias ls='ls -F'
+alias la='ls -laF'
+
+sshtmux() { ssh -t "$1" tmux attach; }
+sshauto() { autossh -t -M 0 "$1"; }
+sshtmuxauto() { autossh -t -M 0 "$1" tmux attach; }
+moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux attach; }
 
