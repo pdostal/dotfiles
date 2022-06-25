@@ -108,9 +108,8 @@ if command -v kubectl &> /dev/null; then
   complete -o default -F __start_kubectl k
 fi
 
-[ -f /opt/homebrew/bin/brew ] && eval '$(/opt/homebrew/bin/brew shellenv)'
-
-[ "$(hash rbenv 2>/dev/null)" ] && eval '$(rbenv init -)'
+test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
+hash rbenv 2>/dev/null && eval '$(rbenv init -)'
 
 alias g='git'
 alias k=kubectl

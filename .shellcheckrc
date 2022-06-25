@@ -4,5 +4,6 @@
 # Disable SC2154 (warning): myPrimaryDevice is referenced but not assigned
 # Disable SC2086 (info): Double quote to prevent globbing and word splitting.
 # Disable SC2231 (info): Quote expansions in this for loop glob to prevent wordsplitting, e.g. "$dir"/*.txt .
-disable=SC2148,SC1091,SC1090,SC2154,SC2086,SC2231
+# Disable SC2046 (warning): Quote this to prevent word splitting.
+disable=SC2148,SC1091,SC1090,SC2154,SC2086,SC2231,SC2046
 
