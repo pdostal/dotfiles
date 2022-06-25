@@ -88,6 +88,7 @@ else
   start_agent
 fi
 
+test -d "/opt/homebrew/opt/coreutils/libexec/gnubin/" && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin/:$PATH"
 test -d "/usr/local/bin" && export PATH="/usr/local/bin:$PATH"
 test -d "$HOME/bin" && export PATH="$HOME/bin:$PATH"
 
