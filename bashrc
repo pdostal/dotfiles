@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 export LANG="en_us.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -7,7 +6,7 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_MONETARY="en_US.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 
-[ -z "$PS1" ] && return
+test -z "$PS1" && return
 
 # Based on: https://github.com/jimeh/git-aware-prompt
 find_git_branch() {
@@ -89,9 +88,8 @@ else
   start_agent
 fi
 
-[ -d "/usr/local/bin" ] && export PATH="/usr/local/bin:$PATH"
-export PATH="./bin:$HOME/bin:/usr/local/sbin:$PATH"
-[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
+test -d "/usr/local/bin" && export PATH="/usr/local/bin:$PATH"
+test -d "$HOME/bin" && export PATH="$HOME/bin:$PATH"
 
 # Bash completion
 if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -102,10 +100,10 @@ fi
 [ -f /usr/local/share/bash-completion/bash_completion ] && source /usr/local/share/bash-completion/bash_completion
 [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && source /opt/homebrew/etc/profile.d/bash_completion.sh
 
-[ "$(command -v gh &> /dev/null)" ] && eval '$(gh completion)'
+command -v gh &> /dev/null && eval '$(gh completion)'
 
-if [ "$(command -v kubectl &> /dev/null)" ]; then
-  eval '$(kubectl completion bash)'
+if command -v kubectl &> /dev/null; then
+  source <(kubectl completion bash)
   complete -o default -F __start_kubectl k
 fi
 
@@ -147,4 +145,6 @@ sshtmux() { ssh -t "$1" tmux attach; }
 sshauto() { autossh -t -M 0 "$1"; }
 sshtmuxauto() { autossh -t -M 0 "$1" tmux attach; }
 moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux attach; }
+
+command -v motd &> /dev/null && motd
 
