@@ -101,7 +101,7 @@ fi
 [ -f /usr/local/share/bash-completion/bash_completion ] && source /usr/local/share/bash-completion/bash_completion
 [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && source /opt/homebrew/etc/profile.d/bash_completion.sh
 
-command -v gh &> /dev/null && eval '$(gh completion)'
+command -v gh >/dev/null 2>&1 && eval "$(gh completion)"
 
 if command -v kubectl &> /dev/null; then
   source <(kubectl completion bash)
@@ -109,7 +109,7 @@ if command -v kubectl &> /dev/null; then
 fi
 
 test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
-hash rbenv 2>/dev/null && eval '$(rbenv init -)'
+command -v rbenv 2>/dev/null && eval '$(rbenv init -)'
 
 alias g='git'
 alias k=kubectl
