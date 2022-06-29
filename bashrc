@@ -1,10 +1,10 @@
-export LANG="en_us.UTF-8"
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-export LC_TIME="en_US.UTF-8"
-export LC_NUMERIC="en_US.UTF-8"
-export LC_MONETARY="en_US.UTF-8"
-export LC_MESSAGES="en_US.UTF-8"
+#export LANG="en_US.UTF-8"
+#export LC_ALL="en_US.UTF-8"
+#export LC_CTYPE="en_US.UTF-8"
+#export LC_TIME="en_US.UTF-8"
+#export LC_NUMERIC="en_US.UTF-8"
+#export LC_MONETARY="en_US.UTF-8"
+#export LC_MESSAGES="en_US.UTF-8"
 
 test -z "$PS1" && return
 
@@ -140,6 +140,9 @@ export LS_COLORS='bd=0:ca=0:cd=0:di=0:do=0:ex=0:pi=0:fi=0:ln=0:mh=0:no=0:or=0:ow
 
 alias ls='ls -F'
 alias la='ls -laF'
+
+export FZF_DEFAULT_OPTS='--height 40%'
+
 
 sshtmux() { ssh -t "$1" tmux attach; }
 sshauto() { autossh -t -M 0 "$1"; }
