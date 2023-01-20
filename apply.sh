@@ -32,8 +32,9 @@ copytwo() {
 # bash
 copyone $1/.bashrc $2/bashrc_secret 770
 copytwo $1/.bashrc $2/bashrc
-# vim
-copydir $1/.vim $2/vim 775
+# neovim
+copyone $1/.config/nvim/init.lua $2/neovim/init.lua 755
+copyone $1/.config/nvim/lua/plugins.lua $2/neovim/plugins.lua 755
 # git
 copyone $1/.gitconfig $2/gitconfig 750
 copytwo $1/.gitconfig $2/gitconfig_secret

@@ -1,4 +1,0 @@
-git clone https://github.com/vim-scripts/vim-auto-save
-git clone https://github.com/ap/vim-buftabline
-git clone https://github.com/kien/ctrlp.vim vim-ctrlp
-
