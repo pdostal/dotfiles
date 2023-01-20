@@ -53,10 +53,3 @@ copytwo $1/.tmux.conf $2/tmux_secret.conf
 # ansible
 copyone $1/.ansible.cfg $2/ansible.cfg 744
 
-# tmuxinator
-for filename in $2/tmuxinator/*; do
-  secretname=$(basename "$filename")
-  localname=$(echo "$secretname" | sed 's/_secret//' )
-  copyone $1/.tmuxinator/$localname $2/tmuxinator/$secretname 744
-done
-

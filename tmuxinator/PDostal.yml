@@ -1,7 +1,0 @@
-name: PDostal
-root: ~/
-
-windows:
-- huis: autossh -t -M 0 huis tmux attach
-- mashina: autossh -t -M 0 mashina tmux attach
-
