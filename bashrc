@@ -61,8 +61,6 @@ else
   export PS1="\[\e]0;\h: \w\a\007\]\u@\h:\w\$git_branch\$git_tag\$git_dirty\$(kube_ps1)$ "
 fi
 
-export EDITOR="vim"
-
 unset MAILCHECK
 
 HISTSIZE=10000
@@ -123,10 +121,13 @@ alias dotfilesapply='~/dotfiles/apply.sh ~ ~/dotfiles'
 alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
 alias mtr='sudo mtr'
 
-if ! command -v vim &> /dev/null; then
-  if command -v nvim &> /dev/null; then
-    alias vim='nvim'
-  fi
+if command -v nvim &> /dev/null; then
+  export EDITOR="nvim"
+  alias vim='nvim'
+elif command -v vim &> /dev/null; then
+  export EDITOR="vim"
+else
+  echo "Install NeoVim or Vim"
 fi
 
 # BLK                   0
