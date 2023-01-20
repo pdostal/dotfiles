@@ -30,9 +30,8 @@ copytwo() {
 }
 
 # bash
-copyone $1/.bashrc $2/bashrc 770
-copytwo $1/.bashrc $2/bashrc_secret
-copyone $1/.bash_profile $2/bash_profile_secret 700
+copyone $1/.bashrc $2/bashrc_secret 770
+copytwo $1/.bashrc $2/bashrc
 # vim
 copydir $1/.vim $2/vim 775
 # git
