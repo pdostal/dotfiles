@@ -123,6 +123,12 @@ alias dotfilesapply='~/dotfiles/apply.sh ~ ~/dotfiles'
 alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
 alias mtr='sudo mtr'
 
+if ! command -v vim &> /dev/null; then
+  if command -v nvim &> /dev/null; then
+    alias vim='nvim'
+  fi
+fi
+
 # BLK                   0
 # CAPABILITY            0
 # CHR                   0
