@@ -15,8 +15,13 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- Remember last position when reopening files
+  use 'ethanholz/nvim-lastplace'
+
   -- Simple plugins can be specified as strings
   use 'rstacruz/vim-closer'
+
+  use 'lewis6991/gitsigns.nvim'
 
   use {
     'nvim-lualine/lualine.nvim',

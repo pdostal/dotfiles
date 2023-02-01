@@ -1,5 +1,48 @@
 require("plugins")
 
+vim.o.nobackup = true
+vim.o.nowritebackup = true
+vim.o.noswapfile = true
+
+vim.o.showtabline = 0 -- Show tab bar even for one tab
+
+vim.o.encoding = 'UTF-8'
+vim.o.fileencoding = 'UTF-8'
+vim.o.number = true
+vim.o.relativenumber = false
+vim.o.showcmd = true -- Visually show what are you typing
+vim.o.syntax = true
+
+vim.o.backspace = "indent,eol,start" -- allow backspacing over everything.
+vim.o.esckeys = true -- Allow cursor keys in insert mode.
+vim.o.nostartofline = true -- Make j/k respect the columns
+
+vim.o.expandtab = true -- Convert tabs to spaces
+vim.o.tabstop = "2"
+vim.o.shiftwidth = "2"
+
+vim.o.auto_save = 1
+vim.o.auto_save_silent = 1
+
+require('gitsigns').setup{
+  signcolumn = false,
+  numhl = true,
+  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    delay = 500,
+    ignore_whitespace = false,
+  },
+  current_line_blame_formatter = '<author>, <author_time:%R> - <summary>'
+}
+
+require'nvim-lastplace'.setup {
+  lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+  lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+  lastplace_open_folds = true
+}
+
 require('lualine').setup {
   options = {
     icons_enabled = false,
