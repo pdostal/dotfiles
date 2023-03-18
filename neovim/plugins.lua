@@ -15,6 +15,9 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- Language Server Protocol
+  use 'neovim/nvim-lspconfig'
+
   -- Remember last position when reopening files
   use 'ethanholz/nvim-lastplace'
 

@@ -1,5 +1,7 @@
 require("plugins")
 
+vim.o.mouse = nil
+
 vim.o.nobackup = true
 vim.o.nowritebackup = true
 vim.o.noswapfile = true
@@ -42,6 +44,9 @@ require'nvim-lastplace'.setup {
   lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
   lastplace_open_folds = true
 }
+
+-- Pyright
+require('lspconfig').pyright.setup{}
 
 require('lualine').setup {
   options = {
