@@ -104,7 +104,8 @@ fi
 [ -f /usr/local/share/bash-completion/bash_completion ] && source /usr/local/share/bash-completion/bash_completion
 [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && source /opt/homebrew/etc/profile.d/bash_completion.sh
 
-command -v gh >/dev/null 2>&1 && eval "$(gh completion)"
+command -v gh >/dev/null 2>&1 && eval "$(gh completion -s bash)"
+command -v glab >/dev/null 2>&1 && eval "$(glab completion -s bash)"
 
 if command -v kubectl &> /dev/null; then
   source <(kubectl completion bash)
