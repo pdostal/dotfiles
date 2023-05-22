@@ -28,6 +28,7 @@
   excludesfile = ~/dotfiles/gitignore
   excludesfile = ~/external/github_gitignore/Global/OSX.gitignore
   excludefile = ~/.gitignore
+  pager = bat
 [push]
   default = matching
 [filter "lfs"]

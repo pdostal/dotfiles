@@ -114,6 +114,11 @@ if command -v kubectl &> /dev/null; then
   complete -o default -F __start_kubectl k
 fi
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/opt/google-cloud-sdk/path.bash.inc' ]; then . '/opt/google-cloud-sdk/path.bash.inc'; fi
+# The next line enables shell command completion for gcloud.
+if [ -f '/opt/google-cloud-sdk/completion.bash.inc' ]; then . '/opt/google-cloud-sdk/completion.bash.inc'; fi
+
 test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
 command -v rbenv 2>/dev/null && eval '$(rbenv init -)'
 
@@ -123,6 +128,12 @@ alias lastsudo='sudo $(history -p \!\!)'
 alias dotfilesapply='~/dotfiles/apply.sh ~ ~/dotfiles'
 alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
 alias mtr='sudo mtr'
+
+if command -v bat &> /dev/null; then
+  alias cat='bat'
+else
+  echo "Install NeoVim or Vim"
+fi
 
 if command -v nvim &> /dev/null; then
   export EDITOR="nvim"
