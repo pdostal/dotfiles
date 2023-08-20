@@ -78,17 +78,19 @@ function start_agent {
   ssh-add
 }
 
-if [ -f "$HOME/.ssh/environment" ]; then
-  source "$HOME/.ssh/environment" > /dev/null
-  if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
-    echo "Process ${SSH_AGENT_PID} is dead."
-    start_agent
+if [ "$myPrimaryDevice" == 1 ]; then
+  if [ -f "$HOME/.ssh/environment" ]; then
+    source "$HOME/.ssh/environment" > /dev/null
+    if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
+      echo "Process ${SSH_AGENT_PID} is dead."
+      start_agent
+    else
+      echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+    fi
   else
-    echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+    echo "File $HOME/.ssh/environment does not exist yet."
+    start_agent
   fi
-else
-  echo "File $HOME/.ssh/environment does not exist yet."
-  start_agent
 fi
 
 test -d "/opt/homebrew/opt/coreutils/libexec/gnubin/" && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin/:$PATH"
