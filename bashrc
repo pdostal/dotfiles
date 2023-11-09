@@ -58,7 +58,7 @@ PROMPT_COMMAND="find_git_branch; find_git_tag; find_git_dirty; $PROMPT_COMMAND"
 if [ "$myPrimaryDevice" == 1 ]; then
   export PS1="\[\e]0;local: \w\a\007\][$?] \h:\w\$git_branch\$git_tag\$git_dirty\$(kube_ps1) $ "
 else
-  export PS1="\[\e]0;\h: \w\a\007\][$?] \u@\h:\w\$git_branch\$git_tag\$git_dirty\$(kube_ps1) $ "
+  export PS1="\[\e]0;\u@\h: \w\a\007\][$?] \u@\h:\w\$git_branch\$git_tag\$git_dirty\$(kube_ps1) $ "
 fi
 
 unset MAILCHECK
@@ -174,6 +174,8 @@ sshtmux() { ssh -t "$1" tmux attach; }
 sshauto() { autossh -t -M 0 "$1"; }
 sshtmuxauto() { autossh -t -M 0 "$1" tmux attach; }
 moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux attach; }
+
+ipinfo() { curl -s "https://ipinfo.io/$1?token=$ipinfo_api_key"; echo; }
 
 command -v motd &> /dev/null && motd
 
