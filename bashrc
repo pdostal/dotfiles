@@ -56,9 +56,9 @@ fi
 PROMPT_COMMAND="find_git_branch; find_git_tag; find_git_dirty; $PROMPT_COMMAND"
 
 if [ "$myPrimaryDevice" == 1 ]; then
-  export PS1="\[\e]0;local: \w\a\007\][$?] \h:\w\$git_branch\$git_tag\$git_dirty\$(kube_ps1) $ "
+  export PS1="\[\e]0;local: \w\a\007\]\e[1;31m$? \e[1;34m\h\e[m:\e[1;32m\w\e[1;34m\$git_branch\$git_tag\$git_dirty\$(kube_ps1) \e[1;34m\$\e[m "
 else
-  export PS1="\[\e]0;\u@\h: \w\a\007\][$?] \u@\h:\w\$git_branch\$git_tag\$git_dirty\$(kube_ps1) $ "
+  export PS1="\[\e]0;\h@\h: \w\a\007\]\e[1;31m$? \e[1;31m\u\e[1;34m@\e[1;34m\h\e[m:\e[1;32m\w\e[1;34m\$git_branch\$git_tag\$git_dirty\$(kube_ps1) \e[1;34m$\e[m "
 fi
 
 unset MAILCHECK
