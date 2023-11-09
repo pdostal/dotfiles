@@ -55,10 +55,16 @@ fi
 
 PROMPT_COMMAND="find_git_branch; find_git_tag; find_git_dirty; $PROMPT_COMMAND"
 
+green="\001$(tput setaf 2)\002"
+red="\001$(tput setaf 1)\002"
+blue="\001$(tput setaf 4)\002"
+dim="\001$(tput bold)\002"
+dim="\001$(tput dim)\002"
+reset="\001$(tput sgr0)\002"
 if [ "$myPrimaryDevice" == 1 ]; then
-  export PS1="\[\e]0;local: \w\a\007\]\e[1;31m$? \e[1;34m\h\e[m:\e[1;32m\w\e[1;34m\$git_branch\e[1;32m\$git_tag\e[1;31m\$git_dirty\e[1;34m\$(kube_ps1) \e[1;31m\$\e[m "
+  export PS1="\[\e]0;local: \w\a\007\]$bold$red$? $blue\h$reset$bold:$green\w$blue\$git_branch\$git_tag$red\$git_dirty\$(kube_ps1) $red\$$reset "
 else
-  export PS1="\[\e]0;\h@\h: \w\a\007\]\e[1;31m$? \e[1;31m\u\e[1;34m@\e[1;34m\h\e[m:\e[1;32m\w\e[1;34m\$git_branch\e[1;32m\$git_tag\e[1;31m\$git_dirty\e[1;34m\$(kube_ps1) \e[1;31m\$\e[m "
+  export PS1="\[\e]0;\h@\h: \w\a\007\]$bold$red$? $green\u$red@$blue\h$reset$bold:$green\w$blue\$git_branch\$git_tag$red\$git_dirty\$(kube_ps1) $red\$$reset "
 fi
 
 unset MAILCHECK
