@@ -10,6 +10,9 @@ export LC_COLLATE=en_US.UTF-8
 test -z "$PS1" && return
 export GIT_PAGER=cat
 
+# GnuPG
+export GPG_TTY=$(tty)
+
 # Tells 'less' not to paginate if less than a page
 export LESS="-F -X $LESS"
 
