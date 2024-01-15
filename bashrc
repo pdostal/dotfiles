@@ -93,8 +93,8 @@ if [ "$myPrimaryDevice" == 1 ]; then
     if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
       echo "Process ${SSH_AGENT_PID} is dead."
       start_agent
-    else
-      echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+    #else
+    #  echo "The SSH agent runs as ${SSH_AGENT_PID} ."
     fi
   else
     echo "File $HOME/.ssh/environment does not exist yet."
@@ -127,6 +127,10 @@ fi
 if [ -f '/opt/google-cloud-sdk/path.bash.inc' ]; then . '/opt/google-cloud-sdk/path.bash.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '/opt/google-cloud-sdk/completion.bash.inc' ]; then . '/opt/google-cloud-sdk/completion.bash.inc'; fi
+
+# Azure CLI (from the MS install script)
+if [ -f '/opt/az' ]; then export PATH=/opt:$PATH; fi 
+if [ -f '/opt/azure-cli/az.completion' ]; then . /opt/azure-cli/az.completion; fi
 
 test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
 command -v rbenv 2>/dev/null && eval '$(rbenv init -)'
