@@ -6,6 +6,7 @@ export LC_NUMERIC=en_US.UTF-8
 export LC_MONETARY=en_US.UTF-8
 export LC_MESSAGES=en_US.UTF-8
 export LC_COLLATE=en_US.UTF-8
+export BROWSER=echo
 
 test -z "$PS1" && return
 export GIT_PAGER=cat
@@ -185,6 +186,16 @@ sshtmuxauto() { autossh -t -M 0 "$1" tmux attach; }
 moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux attach; }
 
 ipinfo() { curl -s "https://ipinfo.io/$1?token=$ipinfo_api_key"; echo; }
+
+# Shell-GPT integration BASH v0.1
+_sgpt_bash() {
+if [[ -n "$READLINE_LINE" ]]; then
+	READLINE_LINE=$(sgpt --shell <<< "$READLINE_LINE")
+    READLINE_POINT=${#READLINE_LINE}
+fi
+}
+bind -x '"\C-l": _sgpt_bash'
+# Shell-GPT integration BASH v0.1
 
 command -v motd &> /dev/null && motd
 
