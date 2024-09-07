@@ -145,8 +145,6 @@ alias mtr='sudo mtr'
 
 if command -v bat &> /dev/null; then
   alias cat='bat'
-else
-  echo "Install NeoVim or Vim"
 fi
 
 if command -v nvim &> /dev/null; then
