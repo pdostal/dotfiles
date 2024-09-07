@@ -66,9 +66,9 @@ dim="\001$(tput bold)\002"
 dim="\001$(tput dim)\002"
 reset="\001$(tput sgr0)\002"
 if [ "$myPrimaryDevice" == 1 ]; then
-  export PS1="\[\e]0;local: \w\a\007\]$bold$red$? $blue\h$reset$bold:$green\w$blue\$git_branch\$git_tag$red\$git_dirty\$(kube_ps1) $red\$$reset "
+  export PS1="\[\e]0;local: \w\a\007\]$bold$blue\h$reset$bold:$green\w$blue\$git_branch\$git_tag$red\$git_dirty\$(kube_ps1) $red\$$reset "
 else
-  export PS1="\[\e]0;\h@\h: \w\a\007\]$bold$red$? $green\u$red@$blue\h$reset$bold:$green\w$blue\$git_branch\$git_tag$red\$git_dirty\$(kube_ps1) $red\$$reset "
+  export PS1="\[\e]0;\h@\h: \w\a\007\]$bold$green\u$red@$blue\h$reset$bold:$green\w$blue\$git_branch\$git_tag$red\$git_dirty\$(kube_ps1) $red\$$reset "
 fi
 
 unset MAILCHECK
