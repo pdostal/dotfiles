@@ -1,0 +1,59 @@
+bind-key r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+setw -g mode-style "fg=brightwhite, bg=black"
+bind-key -T copy-mode-vi 'y' send-keys -X copy-selection-and-cancel
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+
+
+bind-key -r M \
+  setw synchronize-panes off \;\
+  display-message "Panes independent..."
+bind-key -r m \
+  setw synchronize-panes on \;\
+  display-message "Panes synchronized..."
+
+set -g status-style "fg=black,bg=default"
+set -g window-status-style "fg=black,bg=default"
+set -g window-status-bell-style "fg=black,bg=default"
+set -g window-status-current-style "fg=black,bg=default"
+set -g window-status-activity-style "fg=black,bg=default"
+set -g pane-border-style "fg=brightwhite"
+set -g pane-active-border-style "fg=black"
+set -g pane-active-border-style "bg=colour10"
+
+
+set -g status-left " #S "
+set -g status-left-length 30
+set -g status-right-length 8
+set -g status-right "#(uptime | rev | cut -d':' -f1 | rev | sed s/,//g | cut -d'.' -f1 | tr -d "[:space:]") #(~/bin/testconnectivity nix.cz)"
+set -g window-status-format "#I #W"
+set -g window-status-current-format " [ #I #W ] "
+
+set -g set-titles on
+set -g set-titles-string "#S"
+setw -g allow-rename off
+
+set -g base-index 1
+set -g pane-base-index 1
+
+set -g xterm-keys on
+set -g default-terminal "screen-256color"
+
+set -g monitor-activity off
+set -g visual-activity off
+
+set -g mouse off
+
+unbind-key space
+
+new-session
+
+set -g prefix C-a
+bind C-a send-prefix
+unbind C-b
+
