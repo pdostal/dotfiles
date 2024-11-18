@@ -1,0 +1,45 @@
+[alias]
+  lg = log --graph --summary --stat --format='%Cblue%h %Cred%G? %Cblue%D%n%Cgreen%cN <%cE> %GK%n%cd, %cr:%n%n%B'
+  ll = log --format='%Cblue%h %Cgreen%cr %<(22)%Creset%cN %s' -n5
+  cm = commit --signoff
+  ca = commit --signoff --amend
+  can = commit --signoff --amend --no-edit
+  pu = push
+  pl = pull
+  fe = fetch
+  ch = checkout
+  st = status -sbuall
+  br = branch
+  brdel = !sh -c 'git branch -D $1 && git push origin --delete $1' -
+  sh = stash
+  re = reset --hard HEAD
+  ret = reset --soft HEAD^
+  rea = remote add
+  rer = remote rm
+  cl = clone
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+[core]
+  excludesfile = ~/dotfiles/gitignore
+  excludesfile = ~/external/github_gitignore/Global/OSX.gitignore
+  excludefile = ~/.gitignore
+  pager = bat
+[push]
+  default = matching
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
+[commit]
+  gpgsign = true
+[format]
+  signoff = true
+[user]
+  signingkey = CEC9A9AAB7F69CE84136D67A65BDCDAB70974BA9
+  name = Pavel Dostál
+  email = pdostal@pdostal.cz
