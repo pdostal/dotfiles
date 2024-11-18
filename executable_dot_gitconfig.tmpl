@@ -39,7 +39,4 @@
   gpgsign = true
 [format]
   signoff = true
-[user]
-  signingkey = CEC9A9AAB7F69CE84136D67A65BDCDAB70974BA9
-  name = Pavel Dostál
-  email = pdostal@pdostal.cz
+{{- include "gitconfig.secret" -}}
