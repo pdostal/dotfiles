@@ -1,0 +1,205 @@
+{{- include "bashrc.secret" -}}
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_TIME=en_US.UTF-8
+export LC_NUMERIC=en_US.UTF-8
+export LC_MONETARY=en_US.UTF-8
+export LC_MESSAGES=en_US.UTF-8
+export LC_COLLATE=en_US.UTF-8
+export BROWSER=echo
+
+test -z "$PS1" && return
+export GIT_PAGER=cat
+
+# GnuPG
+export GPG_TTY=$(tty)
+
+# Tells 'less' not to paginate if less than a page
+export LESS="-F -X $LESS"
+
+# Based on: https://github.com/jimeh/git-aware-prompt
+find_git_branch() {
+  # Based on: http://stackoverflow.com/a/13003854/170413
+  local branch
+  if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+    if [[ "$branch" == "HEAD" ]]; then
+      branch=' detached*'
+    fi
+    git_branch=" $branch"
+  else
+    git_branch=""
+  fi
+}
+find_git_tag() {
+  local tag
+  if tag=$(git describe --abbrev=0 --tags 2> /dev/null); then
+    git_tag=":$tag"
+  else
+    git_tag=""
+  fi
+}
+find_git_dirty() {
+  local status
+  status="$(git status --porcelain 2> /dev/null)"
+  if [[ "$status" != "" ]]; then
+    git_dirty="'"
+  else
+    git_dirty=""
+  fi
+}
+
+if [ -d ~/external/kube-ps1/ ]; then
+  source ~/external/kube-ps1/kube-ps1.sh
+  export KUBE_PS1_SYMBOL_ENABLE=false
+  export KUBE_PS1_PREFIX=' '
+  export KUBE_PS1_SUFFIX=''
+else
+  alias kube_ps1=echo
+fi
+
+PROMPT_COMMAND="find_git_branch; find_git_tag; find_git_dirty; $PROMPT_COMMAND"
+
+green="\001$(tput setaf 2)\002"
+red="\001$(tput setaf 1)\002"
+blue="\001$(tput setaf 4)\002"
+dim="\001$(tput bold)\002"
+dim="\001$(tput dim)\002"
+reset="\001$(tput sgr0)\002"
+if [ "$myPrimaryDevice" == 1 ]; then
+  export PS1="\[\e]0;local: \w\a\007\]$bold$green\W$blue\$git_branch\$git_tag$red\$git_dirty\$(kube_ps1) $red\$$reset "
+else
+  export PS1="\[\e]0;\h@\h: \w\a\007\]$bold$green\u$red@$blue\h$reset$bold:$green\w$blue\$git_branch\$git_tag$red\$git_dirty\$(kube_ps1) $red\$$reset "
+fi
+
+unset MAILCHECK
+
+HISTSIZE=10000
+HISTFILESIZE=1000000
+shopt -s histappend
+#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# SSH agnet
+function start_agent {
+  echo '' > "$HOME/.ssh/environment"
+  chmod 600 "$HOME/.ssh/environment"
+  ssh-agent >> "$HOME/.ssh/environment"
+  source "$HOME/.ssh/environment" > /dev/null
+  echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+  ssh-add
+}
+
+if [ "$myPrimaryDevice" == 1 ]; then
+  if [ -f "$HOME/.ssh/environment" ]; then
+    source "$HOME/.ssh/environment" > /dev/null
+    if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
+      echo "Process ${SSH_AGENT_PID} is dead."
+      start_agent
+    #else
+    #  echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+    fi
+  else
+    echo "File $HOME/.ssh/environment does not exist yet."
+    start_agent
+  fi
+fi
+
+test -d "/opt/homebrew/opt/coreutils/libexec/gnubin/" && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin/:$PATH"
+test -d "/usr/local/bin" && export PATH="/usr/local/bin:$PATH"
+test -d "$HOME/bin" && export PATH="$HOME/bin:$PATH"
+
+# Bash completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  source /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+  source /etc/bash_completion
+fi
+[ -f /usr/local/share/bash-completion/bash_completion ] && source /usr/local/share/bash-completion/bash_completion
+[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && source /opt/homebrew/etc/profile.d/bash_completion.sh
+
+command -v gh >/dev/null 2>&1 && eval "$(gh completion -s bash)"
+command -v glab >/dev/null 2>&1 && eval "$(glab completion -s bash)"
+
+if command -v kubectl &> /dev/null; then
+  source <(kubectl completion bash)
+  complete -o default -F __start_kubectl k
+fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/opt/google-cloud-sdk/path.bash.inc' ]; then . '/opt/google-cloud-sdk/path.bash.inc'; fi
+# The next line enables shell command completion for gcloud.
+if [ -f '/opt/google-cloud-sdk/completion.bash.inc' ]; then . '/opt/google-cloud-sdk/completion.bash.inc'; fi
+
+# Azure CLI (from the MS install script)
+if [ -f '/opt/az' ]; then export PATH=/opt:$PATH; fi 
+if [ -f '/opt/azure-cli/az.completion' ]; then . /opt/azure-cli/az.completion; fi
+
+test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
+command -v rbenv 2>/dev/null && eval '$(rbenv init -)'
+
+alias g='git'
+alias k=kubectl
+alias lastsudo='sudo $(history -p \!\!)'
+alias dotfilesapply='~/dotfiles/apply.sh ~ ~/dotfiles'
+alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
+alias mtr='sudo mtr'
+
+if command -v bat &> /dev/null; then
+  alias cat='bat'
+fi
+
+if command -v nvim &> /dev/null; then
+  export EDITOR="nvim"
+  alias vim='nvim'
+elif command -v vim &> /dev/null; then
+  export EDITOR="vim"
+else
+  echo "Install NeoVim or Vim"
+fi
+
+# BLK                   0
+# CAPABILITY            0
+# CHR                   0
+# DIR                   0
+# DOOR                  0
+# EXEC                  0
+# FIFO                  0
+# FILE                  0
+# LINK                  0
+# MULTIHARDLINK         0
+# NORMAL                0
+# ORPHAN                0
+# OTHER_WRITABLE        0
+# SETGID                0
+# SETUID                0
+# SOCK                  0
+# STICKY                0
+# STICKY_OTHER_WRITABLE 0
+export LS_COLORS='bd=0:ca=0:cd=0:di=0:do=0:ex=0:pi=0:fi=0:ln=0:mh=0:no=0:or=0:ow=0:sg=0:su=0:so=0:st=0:tw=0:'
+
+alias ls='ls -F'
+alias la='ls -laF'
+
+export FZF_DEFAULT_OPTS='--height 40%'
+
+
+sshtmux() { ssh -t "$1" tmux attach; }
+sshauto() { autossh -t -M 0 "$1"; }
+sshtmuxauto() { autossh -t -M 0 "$1" tmux attach; }
+moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux attach; }
+
+ipinfo() { curl -s "https://ipinfo.io/$1?token=$ipinfo_api_key"; echo; }
+
+# Shell-GPT integration BASH v0.1
+_sgpt_bash() {
+if [[ -n "$READLINE_LINE" ]]; then
+	READLINE_LINE=$(sgpt --shell <<< "$READLINE_LINE")
+    READLINE_POINT=${#READLINE_LINE}
+fi
+}
+bind -x '"\C-l": _sgpt_bash'
+# Shell-GPT integration BASH v0.1
+
+command -v motd &> /dev/null && motd
+
+. "/home/pavel/.acme.sh/acme.sh.env"
