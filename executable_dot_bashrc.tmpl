@@ -108,6 +108,8 @@ test -d "/opt/homebrew/opt/coreutils/libexec/gnubin/" && export PATH="/opt/homeb
 test -d "/usr/local/bin" && export PATH="/usr/local/bin:$PATH"
 test -d "$HOME/bin" && export PATH="$HOME/bin:$PATH"
 
+test -d "$HOME/.acme.sh/" && . "/$home/.acme.sh/acme.sh.env"
+
 # Bash completion
 if [ -f /usr/share/bash-completion/bash_completion ]; then
   source /usr/share/bash-completion/bash_completion
@@ -202,4 +204,3 @@ bind -x '"\C-l": _sgpt_bash'
 
 command -v motd &> /dev/null && motd
 
-. "/home/pavel/.acme.sh/acme.sh.env"
