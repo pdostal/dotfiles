@@ -1,0 +1,38 @@
+shell = "zsh"
+
+[plugins]
+
+[plugins.zsh-defer]
+github = 'romkatv/zsh-defer'
+
+[plugins.fzf-tab]
+github = 'Aloxaf/fzf-tab'
+apply = ["defer"]
+
+[plugins.zsh-256color]
+github = 'chrissicool/zsh-256color'
+
+[plugins.git-prompt]
+github = 'woefe/git-prompt.zsh'
+use = ['git-prompt.zsh']
+
+[plugins.fast-syntax-highlighting]
+github = 'zdharma-continuum/fast-syntax-highlighting'
+
+[plugins.zsh-completions]
+github = 'zsh-users/zsh-completions'
+
+[plugins.zsh-autosuggestions]
+github = 'zsh-users/zsh-autosuggestions'
+use = ["{{ name }}.zsh"]
+
+[plugins.base16]
+github = 'chriskempson/base16-shell'
+
+[plugins.forgit]
+github = 'wfxr/forgit'
+apply = ["PATH", "source"]
+
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+
