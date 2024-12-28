@@ -29,7 +29,7 @@ set -g pane-active-border-style "bg=black"
 
 set -g status-left " #S "
 set -g status-left-length 30
-set -g status-right-length 8
+set -g status-right-length 32
 set -g status-right "#(uptime | rev | cut -d':' -f1 | rev | sed s/,//g | cut -d'.' -f1 | tr -d "[:space:]") #(~/bin/testbackconnectivity)"
 set -g window-status-format "#I #W"
 set -g window-status-current-format " [ #I #W ] "
