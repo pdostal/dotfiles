@@ -25,6 +25,7 @@ function start_agent {
   ssh-add
 }
 
+# SSH Agent
 if [ -f "$HOME/.ssh/environment" ]; then
   source "$HOME/.ssh/environment" > /dev/null
   if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
@@ -38,6 +39,15 @@ else
   start_agent
 fi
 
+# NeoVim
+if command -v nvim &> /dev/null; then
+  export EDITOR="nvim"
+  alias vim='nvim'
+elif command -v vim &> /dev/null; then
+  export EDITOR="vim"
+else
+  echo "Install NeoVim or Vim\!"
+fi
 
 export EDITOR="nvim"
 
