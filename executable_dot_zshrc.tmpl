@@ -13,6 +13,28 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# SSH agnet
+function start_agent {
+  echo '' > "$HOME/.ssh/environment"
+  chmod 600 "$HOME/.ssh/environment"
+  ssh-agent >> "$HOME/.ssh/environment"
+  source "$HOME/.ssh/environment" > /dev/null
+  echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+  ssh-add
+}
+
+if [ -f "$HOME/.ssh/environment" ]; then
+  source "$HOME/.ssh/environment" > /dev/null
+  if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
+    echo "Process ${SSH_AGENT_PID} is dead."
+    start_agent
+  else
+    echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+  fi
+else
+  echo "File $HOME/.ssh/environment does not exist yet."
+  start_agent
+fi
 
 
 export EDITOR="nvim"
