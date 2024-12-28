@@ -44,7 +44,7 @@ export EDITOR="nvim"
 eval "$(sheldon source)"
 eval "$(zoxide init zsh)"
 
-alias cd='z'
-alias g='git'
+if command -v z &> /dev/null; alias cd='z'; fi
+if command -v git &> /dev/null; alias g='git'; fi
 if command -v bat &> /dev/null; alias cat='bat -p'; fi
 
