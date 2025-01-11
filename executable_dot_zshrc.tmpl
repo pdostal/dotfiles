@@ -51,14 +51,17 @@ else
   echo "Install NeoVim or Vim\!"
 fi
 
-export EDITOR="nvim"
-
 eval "$(sheldon source)"
 eval "$(zoxide init zsh)"
 
 if command -v z &> /dev/null; then alias cd='z'; fi
 if command -v git &> /dev/null; then alias g='git'; fi
 if command -v bat &> /dev/null; then alias cat='bat -p'; fi
+
+alias g='git'
+alias k=kubectl
+alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
+alias mtr='sudo mtr'
 
 command -v motd &> /dev/null && motd
 
