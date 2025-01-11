@@ -5,9 +5,9 @@ shell = "zsh"
 #[plugins.zsh-defer]
 #github = 'romkatv/zsh-defer'
 
-#[plugins.fzf-tab]
-#github = 'Aloxaf/fzf-tab'
-#apply = ["defer"]
+[plugins.fzf-tab]
+github = 'Aloxaf/fzf-tab'
+apply = ["defer"]
 
 [plugins.zsh-256color]
 github = 'chrissicool/zsh-256color'
