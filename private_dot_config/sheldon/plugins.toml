@@ -9,8 +9,8 @@ shell = "zsh"
 #github = 'Aloxaf/fzf-tab'
 #apply = ["defer"]
 
-#[plugins.zsh-256color]
-#github = 'chrissicool/zsh-256color'
+[plugins.zsh-256color]
+github = 'chrissicool/zsh-256color'
 
 [plugins.git-prompt]
 github = 'woefe/git-prompt.zsh'
