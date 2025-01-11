@@ -66,5 +66,11 @@ alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
 alias mtr='sudo mtr'
 alias cd='z'
 
+test -d "/opt/homebrew/opt/coreutils/libexec/gnubin/" && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin/:$PATH"
+test -d "/usr/local/bin" && export PATH="/usr/local/bin:$PATH"
+test -d "$HOME/bin" && export PATH="$HOME/bin:$PATH"
+
+test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
+
 command -v motd &> /dev/null && motd
 
