@@ -2,19 +2,19 @@ shell = "zsh"
 
 [plugins]
 
-#[plugins.zsh-defer]
-#github = 'romkatv/zsh-defer'
+[plugins.zsh-defer]
+github = 'romkatv/zsh-defer'
 
-#[plugins.fzf-tab]
-#github = 'Aloxaf/fzf-tab'
-#apply = ["defer"]
+[plugins.fzf-tab]
+github = 'Aloxaf/fzf-tab'
+apply = ["defer"]
 
-#[plugins.zsh-256color]
-#github = 'chrissicool/zsh-256color'
+[plugins.zsh-256color]
+github = 'chrissicool/zsh-256color'
 
-#[plugins.git-prompt]
-#github = 'woefe/git-prompt.zsh'
-#use = ['git-prompt.zsh']
+[plugins.git-prompt]
+github = 'woefe/git-prompt.zsh'
+use = ['git-prompt.zsh']
 
 [plugins.fast-syntax-highlighting]
 github = 'zdharma-continuum/fast-syntax-highlighting'
