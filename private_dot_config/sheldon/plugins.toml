@@ -12,9 +12,9 @@ shell = "zsh"
 #[plugins.zsh-256color]
 #github = 'chrissicool/zsh-256color'
 
-#[plugins.git-prompt]
-#github = 'woefe/git-prompt.zsh'
-#use = ['git-prompt.zsh']
+[plugins.git-prompt]
+github = 'woefe/git-prompt.zsh'
+use = ['git-prompt.zsh']
 
 [plugins.fast-syntax-highlighting]
 github = 'zdharma-continuum/fast-syntax-highlighting'
