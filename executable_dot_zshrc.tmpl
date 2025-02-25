@@ -78,7 +78,7 @@ sshtmuxauto() { autossh -t -M 0 "$1" tmux attach; }
 moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux attach; }
 
 bindkey '^?' backward-kill-word
-
+bindkey '^[[3;3~' kill-word
 
 command -v motd &> /dev/null && motd
 
