@@ -86,10 +86,10 @@ if command -v bat &> /dev/null; then alias cat='bat -p'; fi
 alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
 alias mtr='sudo mtr'
 
-sshtmux() { ssh -t "$1" tmux attach; }
+sshtmux() { ssh -t "$1" tmux -CC attach; }
 sshauto() { autossh -t -M 0 "$1"; }
-sshtmuxauto() { autossh -t -M 0 "$1" tmux attach; }
-moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux attach; }
+sshtmuxauto() { autossh -t -M 0 "$1" tmux -CC attach; }
+moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux -CC attach; }
 
 command -v motd &> /dev/null && motd
 
