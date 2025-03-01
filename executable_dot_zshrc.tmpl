@@ -65,10 +65,12 @@ eval "$(zoxide init zsh)"
 export WORDCHARS=${WORDCHARS/\/}
 source ~/.git-prompt.zsh
 
-PROMPT='$(kube_ps1)'$PROMPT
-export KUBE_PS1_PREFIX=''
-export KUBE_PS1_SUFFIX=' '
-export KUBE_PS1_SYMBOL_ENABLE=false
+if typeset -f kube_ps1 > /dev/null; then
+  PROMPT='$(kube_ps1)'$PROMPT
+  export KUBE_PS1_PREFIX=''
+  export KUBE_PS1_SUFFIX=' '
+  export KUBE_PS1_SYMBOL_ENABLE=false
+fi
 
 if command -v z &> /dev/null; then alias cd='z'; fi
 if command -v git &> /dev/null; then alias g='git'; fi
