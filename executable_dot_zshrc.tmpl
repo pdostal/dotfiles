@@ -70,7 +70,7 @@ if command -v kubectl &> /dev/null; then
 	source <(kubectl completion zsh)
 	source <(kubectl completion zsh | sed 's/kubectl/k/g')
 	alias k=kubectl
-fi elif command -v kubecolor &> /dev/null; then
+elif command -v kubecolor &> /dev/null; then
 	source <(kubecolor completion zsh)
 	source <(kubecolor completion zsh | sed 's/kubectl/k/g')
 	alias k=kubecolor
