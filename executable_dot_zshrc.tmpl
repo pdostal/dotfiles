@@ -66,15 +66,15 @@ eval "$(zoxide init zsh)"
 export WORDCHARS=${WORDCHARS/\/}
 source ~/.git-prompt.zsh
 
-if command -v kubectl &> /dev/null; then
-	source <(kubectl completion zsh)
-	source <(kubectl completion zsh | sed 's/kubectl/k/g')
-	alias k=kubectl
-elif command -v kubecolor &> /dev/null; then
+if command -v kubecolor &> /dev/null && command -v kubectl &> /dev/null; then
 	source <(kubecolor completion zsh)
 	source <(kubecolor completion zsh | sed 's/kubectl/k/g')
 	alias k=kubecolor
 	alias kubectl=kubecolor
+elif command -v kubectl &> /dev/null; then
+	source <(kubectl completion zsh)
+	source <(kubectl completion zsh | sed 's/kubectl/k/g')
+	alias k=kubectl
 fi
 
 if typeset -f kube_ps1 > /dev/null; then
