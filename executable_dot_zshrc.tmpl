@@ -91,6 +91,7 @@ if command -v bat &> /dev/null; then alias cat='bat -p'; fi
 
 alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
 alias mtr='sudo mtr'
+alias susepkg='podman run -it ghcr.io/ricardobranco777/susepkg:latest'
 
 sshtmux() { ssh -t "$1" tmux attach; }
 sshauto() { autossh -t -M 0 "$1"; }
