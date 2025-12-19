@@ -85,6 +85,7 @@ if typeset -f kube_ps1 > /dev/null; then
   export KUBE_PS1_SYMBOL_ENABLE=false
 fi
 
+alias podman-az='podman run --rm -it --name azure-cli --replace -v ~/.ssh:/root/.ssh -v /tmp:/tmp -v ~/.azure:/root/.azure mcr.microsoft.com/azure-cli az'
 if command -v z &> /dev/null; then alias cd='z'; fi
 if command -v git &> /dev/null; then alias g='git'; fi
 if command -v bat &> /dev/null; then alias cat='bat -p'; fi
