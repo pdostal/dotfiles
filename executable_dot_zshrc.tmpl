@@ -111,8 +111,8 @@ sshauto() { autossh -t -M 0 "$1"; }
 sshtmuxauto() { autossh -t -M 0 "$1" tmux attach; }
 moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux attach; }
 
-if [ -f '~/.local/google-cloud-sdk/path.zsh.inc' ]; then . '~/.local/google-cloud-sdk/path.zsh.inc'; fi
-if [ -f '~/.local/google-cloud-sdk/completion.zsh.inc' ]; then . '~/.local/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f ~/.local/google-cloud-sdk/path.zsh.inc ]; then . ~/.local/google-cloud-sdk/path.zsh.inc; fi
+if [ -f ~/.local/google-cloud-sdk/completion.zsh.inc ]; then . ~/.local/google-cloud-sdk/completion.zsh.inc; fi
 
 if [[ -o interactive ]]; then
   command -v motd &> /dev/null && motd
