@@ -101,5 +101,7 @@ sshauto() { autossh -t -M 0 "$1"; }
 sshtmuxauto() { autossh -t -M 0 "$1" tmux attach; }
 moshtmux() { ssh "$1" 'kill `pidof mosh-server` >/dev/null 2>&1'; mosh "$1" tmux attach; }
 
-command -v motd &> /dev/null && motd
+if [[ $- == *i* ]]; then
+  command -v motd &> /dev/null && motd
+fi
 
