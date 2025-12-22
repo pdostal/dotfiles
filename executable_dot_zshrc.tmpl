@@ -32,7 +32,9 @@ function start_agent {
   chmod 600 "$HOME/.ssh/environment"
   ssh-agent >> "$HOME/.ssh/environment"
   source "$HOME/.ssh/environment" > /dev/null
-  echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+  if [[ $- == *i* ]]; then
+    echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+  fi
   ssh-add
 }
 
@@ -40,13 +42,19 @@ function start_agent {
 if [ -f "$HOME/.ssh/environment" ]; then
   source "$HOME/.ssh/environment" > /dev/null
   if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
-    echo "Process ${SSH_AGENT_PID} is dead."
+    if [[ $- == *i* ]]; then
+      echo "Process ${SSH_AGENT_PID} is dead."
+    fi
     start_agent
   else
-    echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+    if [[ $- == *i* ]]; then
+      echo "The SSH agent runs as ${SSH_AGENT_PID} ."
+    fi
   fi
 else
-  echo "File $HOME/.ssh/environment does not exist yet."
+  if [[ $- == *i* ]]; then
+    echo "File $HOME/.ssh/environment does not exist yet."
+  fi
   start_agent
 fi
 
@@ -57,7 +65,9 @@ if command -v nvim &> /dev/null; then
 elif command -v vim &> /dev/null; then
   export EDITOR="vim"
 else
-  echo "Install NeoVim or Vim\!"
+  if [[ $- == *i* ]]; then
+    echo "Install NeoVim or Vim\!"
+  fi
 fi
 
 eval "$(sheldon source)"
