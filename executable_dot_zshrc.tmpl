@@ -100,7 +100,8 @@ alias ll='ls -lah'
 if command -v z &> /dev/null; then alias cd='z'; fi
 if command -v git &> /dev/null; then alias g='git'; fi
 if command -v bat &> /dev/null; then alias cat='bat -p'; fi
-if command -v gcloud &> /dev/null; then alias gcloud='/opt/google-cloud-sdk/bin/gcloud'; fi
+
+if ! command -v gcloud &> /dev/null; then alias gcloud='/opt/google-cloud-sdk/bin/gcloud'; fi
 
 alias mosh='MOSH_TITLE_NOPREFIX=true mosh'
 alias mtr='sudo mtr'
