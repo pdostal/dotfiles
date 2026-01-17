@@ -58,7 +58,7 @@ elif command -v kubectl &> /dev/null; then
 fi
 
 if typeset -f kube_ps1 > /dev/null; then
-  PROMPT='$(kube_ps1)'$PROMPT
+  #PROMPT='$(kube_ps1)'$PROMPT
   export KUBE_PS1_PREFIX=''
   export KUBE_PS1_SUFFIX=' '
   export KUBE_PS1_SYMBOL_ENABLE=false
