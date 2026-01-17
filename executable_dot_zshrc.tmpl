@@ -26,38 +26,6 @@ test -d "$HOME/bin" && export PATH="$HOME/bin:$PATH"
 test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
-# SSH agnet
-function start_agent {
-  echo '' > "$HOME/.ssh/environment"
-  chmod 600 "$HOME/.ssh/environment"
-  ssh-agent >> "$HOME/.ssh/environment"
-  source "$HOME/.ssh/environment" > /dev/null
-  if [[ -o interactive ]]; then
-    echo "The SSH agent runs as ${SSH_AGENT_PID} ."
-  fi
-  ssh-add
-}
-
-# SSH Agent
-if [ -f "$HOME/.ssh/environment" ]; then
-  source "$HOME/.ssh/environment" > /dev/null
-  if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
-    if [[ -o interactive ]]; then
-      echo "Process ${SSH_AGENT_PID} is dead."
-    fi
-    start_agent
-  else
-    if [[ -o interactive ]]; then
-      echo "The SSH agent runs as ${SSH_AGENT_PID} ."
-    fi
-  fi
-else
-  if [[ -o interactive ]]; then
-    echo "File $HOME/.ssh/environment does not exist yet."
-  fi
-  start_agent
-fi
-
 # NeoVim
 if command -v nvim &> /dev/null; then
   export EDITOR="nvim"
