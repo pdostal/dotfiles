@@ -36,6 +36,9 @@ apply = ["PATH", "source"]
 [plugins.kube-ps1]
 git = "https://github.com/jonmosco/kube-ps1"
 
+[plugins.oh-my-zsh]
+github = "ohmyzsh/ohmyzsh"
+
 [templates]
 defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
 
