@@ -1,21 +1,21 @@
-KeepAlive yes
-Compression yes
-ControlMaster auto
-VerifyHostKeyDNS yes
-ControlPath /tmp/ssh_%r@%h:%p
-ControlPersist 86400
-PreferredAuthentications gssapi-with-mic,hostbased,publickey,keyboard-interactive,password
-VisualHostKey no
-ServerAliveInterval 5
-ServerAliveCountMax 12
-ForwardAgent no
-LogLevel INFO
-AddKeysToAgent yes
-SendEnv LANG LC_*
 
 {{- include "private_dot_secrets/ssh" -}}
 
 Host *
   User pdostal
   AddKeysToAgent yes
+  KeepAlive yes
+  Compression yes
+  ControlMaster auto
+  VerifyHostKeyDNS yes
+  ControlPath /tmp/ssh_%r@%h:%p
+  ControlPersist 86400
+  PreferredAuthentications gssapi-with-mic,hostbased,publickey,keyboard-interactive,password
+  VisualHostKey no
+  ServerAliveInterval 5
+  ServerAliveCountMax 12
+  ForwardAgent no
+  LogLevel INFO
+  SendEnv LANG LC_*
+  
 
