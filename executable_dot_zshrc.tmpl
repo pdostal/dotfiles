@@ -43,7 +43,7 @@ eval "$(sheldon source)"
 eval "$(zoxide init zsh)"
 
 export WORDCHARS=${WORDCHARS/\/}
-source ~/.git-prompt.zsh
+# source ~/.git-prompt.zsh
 
 if command -v kubecolor &> /dev/null && command -v kubectl &> /dev/null; then
   source <(kubectl completion zsh)
