@@ -26,6 +26,37 @@ test -d "$HOME/bin" && export PATH="$HOME/bin:$PATH"
 test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
+if [[ "$myPrimaryDevice" == "1" ]]; then
+  SSH_ENV="$HOME/.ssh/agent.env"
+  start_agent() {
+    eval "$(ssh-agent -s)" >/dev/null
+    {
+      echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK"
+      echo "export SSH_AGENT_PID=$SSH_AGENT_PID"
+    } >| "$SSH_ENV"
+    chmod 600 "$SSH_ENV"
+    # Add keys only when agent starts
+    ssh-add
+  }
+  valid_agent() {
+    kill -0 "$SSH_AGENT_PID" 2>/dev/null || return 1
+    [[ -S "$SSH_AUTH_SOCK" ]] || return 1
+    case "$(ps -p "$SSH_AGENT_PID" -o comm= 2>/dev/null)" in
+      ssh-agent|*/ssh-agent) return 0 ;;
+      *) return 1 ;;
+    esac
+  }
+  if [[ -r "$SSH_ENV" ]]; then
+    source "$SSH_ENV" >/dev/null
+    if ! valid_agent; then
+      rm -f "$SSH_ENV"
+      start_agent
+    fi
+  else
+    start_agent
+  fi
+fi
+
 # NeoVim
 if command -v nvim &> /dev/null; then
   export EDITOR="nvim"
