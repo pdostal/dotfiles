@@ -4,8 +4,9 @@
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=99999999
+HISTSIZE=100000000
+SAVEHIST=$HISTSIZE
+setopt SHARE_HISTORY
 setopt beep extendedglob nomatch
 unsetopt notify
 bindkey -e
