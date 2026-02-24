@@ -99,6 +99,9 @@ if typeset -f kube_ps1 > /dev/null; then
   export KUBE_PS1_SYMBOL_ENABLE=false
 fi
 
+alias isc="osc -A https://api.suse.de"
+alias osc="osc -A https://api.opensuse.org"
+
 alias podman-az='podman run --rm -it --name azure-cli --replace -v ~/.ssh:/root/.ssh:z -v ~/.azure:/root/.azure:z mcr.microsoft.com/azure-cli az'
 alias ll='ls -lah'
 if command -v z &> /dev/null; then alias cd='z'; fi
