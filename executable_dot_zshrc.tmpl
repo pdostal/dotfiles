@@ -18,6 +18,11 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+bindkey "^[^?" backward-kill-word
+bindkey "^[[3;3~" kill-word
+
 unsetopt AUTO_REMOVE_SLASH
 
 test -d "/opt/homebrew/opt/coreutils/libexec/gnubin/" && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin/:$PATH"
