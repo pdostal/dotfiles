@@ -35,6 +35,9 @@ git = "https://github.com/jonmosco/kube-ps1"
 [plugins.oh-my-zsh]
 github = "ohmyzsh/ohmyzsh"
 
+[plugins.zsh-claude-code-shell]
+github = "ArielTM/zsh-claude-code-shell"
+
 [templates]
 defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
 
