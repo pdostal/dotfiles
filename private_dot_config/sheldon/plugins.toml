@@ -36,7 +36,8 @@ git = "https://github.com/jonmosco/kube-ps1"
 github = "ohmyzsh/ohmyzsh"
 
 [plugins.zsh-claude-code-shell]
-github = "ArielTM/zsh-claude-code-shell"
+github = "pdostal/zsh-claude-code-shell"
+branch = "fix/job-control-notifications"
 
 [templates]
 defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
