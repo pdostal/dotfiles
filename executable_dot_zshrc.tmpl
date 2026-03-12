@@ -77,7 +77,7 @@ else
 fi
 
 test -d "$HOME/.local/share/sheldon/repos/github.com/ohmyzsh/ohmyzsh" &> /dev/null && export ZSH="$HOME/.local/share/sheldon/repos/github.com/ohmyzsh/ohmyzsh"
-test -d "$HOME/.oh-my-zsh/custom" &> export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+test -d "$HOME/.oh-my-zsh/custom" &> /dev/null && export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 ZSH_THEME=pdostal
 
 eval "$(sheldon source)"
