@@ -1,6 +1,6 @@
 [alias]
   lg = log --graph --summary --stat --format='%Cblue%h %Cred%G? %Cblue%D%n%Cgreen%cN <%cE> %GK%n%cd, %cr:%n%n%B'
-  ll = log --format='%Cblue%h %Cgreen%cr %<(22)%Creset%cN %s' -n5
+  ll = --no-pager log --format='%Cblue%h %Cgreen%cr %<(22)%Creset%cN %s' -n5
   cm = commit --signoff
   ca = commit --signoff --amend
   can = commit --signoff --amend --no-edit
