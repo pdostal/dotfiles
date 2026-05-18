@@ -25,6 +25,7 @@ bindkey "^[[3;3~" kill-word
 
 unsetopt AUTO_REMOVE_SLASH
 
+test -d "/opt/homebrew/bin" && export PATH="/opt/homebrew/bin:$PATH"
 test -d "/opt/homebrew/opt/coreutils/libexec/gnubin/" && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin/:$PATH"
 test -d "/usr/local/bin" && export PATH="/usr/local/bin:$PATH"
 test -d "$HOME/.local/bin" && export PATH="$HOME/.local/bin:$PATH"
