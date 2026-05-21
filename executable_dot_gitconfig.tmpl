@@ -37,6 +37,8 @@
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
   required = true
+[gpg]
+  format = ssh
 
 {{- include "private_dot_secrets/gitconfig" -}}
 
