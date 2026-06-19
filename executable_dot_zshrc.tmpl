@@ -110,6 +110,8 @@ fi
 alias isc="osc -A https://api.suse.de"
 alias osc="osc -A https://api.opensuse.org"
 
+if test -f ~/external/ai-container/ai-container &> /dev/null; then alias ai-container='~/external/ai-container/ai-container'; fi
+
 alias podman-az='podman run --rm -it --name azure-cli --replace -v ~/.ssh:/root/.ssh:z -v ~/.azure:/root/.azure:z mcr.microsoft.com/azure-cli az'
 alias ll='ls -lah'
 if command -v z &> /dev/null; then alias cd='z'; fi
