@@ -29,3 +29,6 @@ heavier.
   the prompt the first time, so be patient before retrying.
 - If a task needs a new program, ask the user to add it to the container
   image rather than trying to install it yourself.
+- Always look at the current directory and git branch - the user might be
+  reffering to already openned pull request.
+
