@@ -2,6 +2,10 @@
 
 {{- include "private_dot_secrets/zshrc" -}}
 
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:$(brew --prefix)/share/zsh:${FPATH}"
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=100000000
