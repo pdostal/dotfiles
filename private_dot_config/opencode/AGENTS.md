@@ -29,6 +29,7 @@ unless explicitly asked for something heavier.
 - Keep comments terse and only add them when genuinely needed, e.g. for
   complex function definitions.
 - Prefer one-liners over spreading a function call across multiple lines.
+  When multi line comment is needed don't go over 3 lines.
 
 # Shell rules
 
