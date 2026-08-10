@@ -10,6 +10,16 @@ Before posting or sending anything to a public system (PR/MR comments,
 reviews, Redmine comments, Bugzilla comments, etc.), ask the user for
 confirmation first — never publish automatically.
 
+GitHub, GitLab, Gitea, and Redmine comments, reviews, and descriptions
+support Markdown and should use it: link issues/PRs/commits/files wherever
+possible, wrap identifiers and code in `backticks`, use **bold** sparingly
+for emphasis, and use fenced ``` code blocks ``` for multi-line snippets or
+logs. Bugzilla comments remain plain text per the rule above.
+
+When asked for a "short comment", "short note", or similar, that means one
+sentence, 140 characters max — a hard limit. If honoring the request needs
+more than that, ask for permission before writing anything longer.
+
 # Sandbox environment notes
 
 This is an openSUSE Tumbleweed container with no root, no sudo, and no
