@@ -1,5 +1,8 @@
 # Writing rules
 
+When asked to solve new problem check if we already are in correct directory /
+branch and ask use for approval before changing directory / branch.
+
 Commit bodies, PR/MR descriptions, GitHub/GitLab comments and reviews, Redmine
 comments and ticket descriptions, and Bugzilla comments are all kept minimal
 and to the point — one short paragraph per issue, category, or area covered,
@@ -38,6 +41,8 @@ unless explicitly asked for something heavier.
 
 - Keep comments terse and only add them when genuinely needed, e.g. for
   complex function definitions.
+- Comments must be one liners except the problem is highly complex in
+  which case two lines are permitted.
 - Prefer one-liners over spreading a function call across multiple lines.
   When multi line comment is needed don't go over 3 lines.
 
