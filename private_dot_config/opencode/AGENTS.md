@@ -51,7 +51,9 @@ unless explicitly asked for something heavier.
 - `gh`, `glab`, and `git` are pre-configured and already authenticated —
   don't try to log in or reconfigure them.
 - Git operations that need the SSH key or a commit signature go through a
-  YubiKey — wait for the user to touch it, and keep in mind they might miss
-  the prompt the first time, so be patient before retrying.
+  YubiKey. Run them with a ~30s bash timeout instead of waiting indefinitely;
+  if it times out without completing, they likely missed the touch prompt —
+  run `~/bin/pushover "Touch YubiKey" "Touch your YubiKey please"`, then
+  retry the same command. Give up after 3 attempts and ask them directly.
 - If a task needs a new program, ask the user to add it to the container
   image rather than trying to install it yourself.
