@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Opencode-DCP/opencode-dynamic-context-pruning/master/dcp.schema.json",
+  "pruneNotificationType": "toast",
+  "compress": {
+    // defaults (100000/50000 tokens) are low for big-context models and nudge constantly; go relative + higher instead
+    "maxContextLimit": "90%",
+    "minContextLimit": "70%",
+    // wait longer after a user message before nagging about compression
+    "iterationNudgeThreshold": 40,
+    // fewer nudges once above maxContextLimit (was 5)
+    "nudgeFrequency": 10,
+    "nudgeForce": "soft"
+  }
+}
