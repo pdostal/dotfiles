@@ -1,7 +1,8 @@
 # Writing rules
 
-When asked to solve new problem check if we already are in correct directory /
-branch and ask use for approval before changing directory / branch.
+On a new task, first check cwd, repo, and branch, and whether a PR/MR is open
+for that branch. If they don't match the task, say so and ask before
+proceeding or changing directory/branch.
 
 Commit bodies, PR/MR descriptions, GitHub/GitLab comments and reviews, Redmine
 comments and ticket descriptions, and Bugzilla comments are all kept minimal
