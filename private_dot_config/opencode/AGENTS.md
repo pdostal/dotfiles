@@ -49,10 +49,11 @@ unless explicitly asked for something heavier.
 
 # Shell rules
 
+- The command-running tool is named `shell`; there is no `bash` tool, never call it.
 - `gh`, `glab`, and `git` are pre-configured and already authenticated —
   don't try to log in or reconfigure them.
 - Git operations that need the SSH key or a commit signature go through a
-  YubiKey. Run them with a ~30s bash timeout instead of waiting indefinitely;
+  YubiKey. Run them with a ~30s `shell` tool timeout instead of waiting indefinitely;
   if it times out without completing, they likely missed the touch prompt —
   run `~/bin/pushover "Touch YubiKey" "Touch your YubiKey please"`, then
   retry the same command. Give up after 3 attempts and ask them directly.
