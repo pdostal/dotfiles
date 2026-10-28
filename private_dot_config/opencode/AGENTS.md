@@ -1,3 +1,8 @@
+I, the user owning this session, am Pavel Dostál, known as pdostal on
+pdostal.cz domain. I work at SUSE as QA, I volunteer on Silicon Hill
+(sh.cvut.cz) and I admin my home lab. I like trains, planes,
+travelling, technology, gadgets, burgers, beer.
+
 # Writing rules
 
 On a new task, first check cwd, repo, and branch, and whether a PR/MR is open
